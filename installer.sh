@@ -35,12 +35,7 @@ done
 echo "Cleaning Installation Files from Brew"
 brew cleanup
 
-# Oh-My-Zsh & Tmux
-echo "Installing Oh-My-Zsh"
-RUNZSH='no'
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh >> MacBook_AutoSetup_log.txt
-chmod +x install.sh >> MacBook_AutoSetup_log.txt
-sh install.sh --unattended >> M
+# Oh-My-Zsh & Tmux Configs
 git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git
 
 echo "Copying zsh Config"
@@ -52,6 +47,17 @@ mkdir -p $HOME/.config/tmux
 cp MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # Install Nvim
+echo "Install Nvim"
+mkdir -p $HOME/Documents/GitHub
+git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub
 
 # Configure Nvim 
 
+# Install Oh-My-Zsh
+echo "Installing Oh-My-Zsh"
+KEEP_ZSHRC='yes'
+OVERWRITE_CONFIRMATION='no'
+
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh >> MacBook_AutoSetup_log.txt
+chmod +x install.sh >> MacBook_AutoSetup_log.txt
+sh install.sh --unattended >> M
