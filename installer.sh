@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "openjdk" "python" "pyenv" "perl" "qmk-toolbox" "ripgrep" "screen" "tree-sitter" "readline" "zsh")
+declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "openjdk" "python" "pyenv" "perl" "qmk-toolbox" "ripgrep" "screen" "tree-sitter" "readline" "zsh" "zsh-autosuggestions")
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle")
 
 touch MacBook_AutoSetup_log.txt
@@ -50,6 +50,12 @@ cp MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 echo "Install Nvim"
 mkdir -p $HOME/Documents/GitHub
 git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub
+
+cd $HOME/Documents/GitHub/neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=Release
+sudo make install
+:
 
 # Install Oh-My-Zsh
 echo "Installing Oh-My-Zsh"
