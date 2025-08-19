@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh")
+declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh")
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro")
 
 touch $HOME/Downloads/MacBook_AutoSetup_log.txt
