@@ -51,13 +51,9 @@ echo "Install Nvim"
 mkdir -p $HOME/Documents/GitHub
 git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub
 
-# Configure Nvim 
-
 # Install Oh-My-Zsh
 echo "Installing Oh-My-Zsh"
 KEEP_ZSHRC='yes'
 OVERWRITE_CONFIRMATION='no'
 
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh >> MacBook_AutoSetup_log.txt
-chmod +x install.sh >> MacBook_AutoSetup_log.txt
-sh install.sh --unattended >> M
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> MacBook_AutoSetup_log.txt
