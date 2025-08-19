@@ -32,11 +32,15 @@ do
   brew install --cask $cask >> MacBook_AutoSetup_log.txt
 done
 
+echo "Cleaning Installation Files from Brew"
 brew cleanup
 
 # Oh-My-Zsh & Tmux
 echo "Installing Oh-My-Zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> MacBook_AutoSetup_log.txt
+RUNZSH='no'
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh >> MacBook_AutoSetup_log.txt
+chmod +x install.sh >> MacBook_AutoSetup_log.txt
+sh install.sh --unattended >> M
 git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git
 
 echo "Copying zsh Config"
