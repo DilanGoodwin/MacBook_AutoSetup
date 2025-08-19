@@ -4,7 +4,7 @@ declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "rust" "node" 
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro")
 
 touch $HOME/Downloads/MacBook_AutoSetup_log.txt
-log = $HOME/Downloads/MacBook_AutoSetup_log.txt
+log=$HOME/Downloads/MacBook_AutoSetup_log.txt
 
 # Xcode
 echo "Installing Xcode Tools"
@@ -72,4 +72,3 @@ OVERWRITE_CONFIRMATION='no'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> $log 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-exit
