@@ -4,7 +4,7 @@ declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "rust" "node" 
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro")
 
 touch $HOME/Downloads/MacBook_AutoSetup_log.txt
-logger="{$HOME/Downloads/MacBook_AutoSetup_log.txt}"
+logger="$HOME/Downloads/MacBook_AutoSetup_log.txt"
 
 # Xcode
 echo "Installing Xcode Tools"
