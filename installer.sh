@@ -3,8 +3,8 @@
 declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh")
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro")
 
-touch $HOME/Downloads/MacBook_AutoSetup_log.txt
-logger="$HOME/Downloads/MacBook_AutoSetup_log.txt"
+logger="$HOME/Documents/MacBook_AutoSetup_log.txt"
+touch $logger
 
 # Xcode
 echo "Installing Xcode Tools"
@@ -34,20 +34,14 @@ do
 done
 
 echo "Cleaning Installation Files from Brew"
-brew cleanup
+brew cleanup >> $logger
 
-# Oh-My-Zsh & Tmux Configs
-git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git >> $logger
-
-echo "Copying zsh Config"
-rm $HOME/.zshrc
-cp MacBook_AutoSetup/.zshrc $HOME/.zshrc
+# Tmux Configs
+git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git $HOME/Documents/MacBook_AutoSetup >> $logger
 
 echo "Copying Tmux Config"
 mkdir -p $HOME/.config/tmux
-cp MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
-
-rm -rf MacBook_AutoSetup
+cp $HOME/Documents/MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # Install Nvim
 echo "Install Nvim"
@@ -70,5 +64,10 @@ KEEP_ZSHRC='yes'
 OVERWRITE_CONFIRMATION='no'
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> $logger
+
+echo "Copying zsh Config"
+rm $HOME/.zshrc
+cp $HOME/Documents/MacBook_AutoSetup/.zshrc $HOME/.zshrc
+
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
