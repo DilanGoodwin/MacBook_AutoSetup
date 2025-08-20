@@ -2,8 +2,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-ZSH_CUSTOM=~/.config/zsh
-
 # Plugins
 plugins=(git zsh-autosuggestions)
 
