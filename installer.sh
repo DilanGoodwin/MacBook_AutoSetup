@@ -69,7 +69,4 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/omz/plu
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/omz/plugins/zsh-syntax-highlighting
 
 echo "Installing Oh-My-Zsh"
-OVERWRITE_CONFIRMATION='no'
-KEEP_ZSHRC='yes'
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> $logger
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc >> $logger
