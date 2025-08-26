@@ -59,15 +59,17 @@ mkdir -p $HOME/.config/nvim
 git clone https://github.com/DilanGoodwin/nvim.config.git $HOME/.config/nvim >> $logger
 
 # Install Oh-My-Zsh
-echo "Installing Oh-My-Zsh"
-KEEP_ZSHRC='yes'
-OVERWRITE_CONFIRMATION='no'
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> $logger
-
 echo "Copying zsh Config"
 rm $HOME/.zshrc
 cp $HOME/Documents/MacBook_AutoSetup/.zshrc $HOME/.zshrc
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+mkdir -p $HOME/.config/omz/plugins
+
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/omz/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/omz/plugins/zsh-syntax-highlighting
+
+echo "Installing Oh-My-Zsh"
+OVERWRITE_CONFIRMATION='no'
+KEEP_ZSHRC='yes'
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended >> $logger
