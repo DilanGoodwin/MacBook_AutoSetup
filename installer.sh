@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "lua-language-server" "luarocks" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh" "jdtls")
-declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-blex-mono-nerd-font" "rectangle-pro" "slack" "microsoft-outlook" "microsoft-office")
+declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-blex-mono-nerd-font" "rectangle-pro" "slack" "microsoft-office")
 
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &

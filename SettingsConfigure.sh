@@ -40,9 +40,6 @@ plutil -replace tilesize -integer 16 $dock
 
 # Finder
 finder="$HOME/Library/Preferences/com.apple.finder.plist"
-plutil -replace DesktopViewSettings.IconViewSettings.axTextSize -integer 11 $finder
-plutil -replace DesktopViewSettings.IconViewSettings.iconSize -integer 56 $finder
-plutil -replace DesktopViewSettings.IconViewSettings.textSize -integer 11 $finder 
 
 # iTerm2 Settings
 printf "iTerm2 Settings\n"
