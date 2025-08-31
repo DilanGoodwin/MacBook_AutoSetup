@@ -1,32 +1,42 @@
 #!/bin/bash
 
-osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Open Applications
+open /Applications/iTerm.app
+open /Applications/Rectangle Pro.app
+
+# Kill Applications
+osascript -e 'tell application "System Preferences" to quit'
+osascript -e 'tell application "iTerm2" to quit'
+osascript -e 'tell application "Rectangle Pro" to quit'
 
 # General Settings
 defaults write -globalDomain AppleActionOnDoubleClick -string "None"
 defaults write -globalDomain AppleInterfaceStyle -string "Dark"
 defaults write -globalDomain NSQuitAlwaysKeepWindows -int 1
 defaults write -globalDomain NSTableViewDefaultSizeMode -int 1
-
-# Terminal Settings
-defaults write com.apple.Terminal "NSWindow Frame TTWindow Basic" -string "0 656 570 371 0 0 1800 1029"
+defaults write -globalDomain AppleMenuBarVisibleInFullscreen -int 1
 
 # Window Management
-defaults write com.apple.WindowManager AppWindowGroupBehaviour -int 1
-defaults write com.apple.WindowManager AutoHide -int 1
-defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -int 0
-defaults write com.apple.WindowManager EnableTilingByEdgeDrag -int 0
-defaults write com.apple.WindowManager EnableTilingOptionAccelerator -int 0
-defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -int 0
-defaults write com.apple.WindowManager HideDesktop -int 1
-defaults write com.apple.WindowManager StageManagerHideWidgets -int 0
-defaults write com.apple.WindowManager StandardHideWidgets -int 0
+windowManager="$HOME/Library/Preferences/com.apple.WindowManager.plist"
+plutil -replace AppWindowGroupBehaviour -integer 1 $windowManager
+plutil -replace AppWindowGroupingBehaviour -integer 1 $windowManager
+plutil -replace AutoHide -integer 1 $windowManager
+plutil -replace EnableStandardClickToShowDesktop -integer 0 $windowManager
+plutil -replace EnableTilingByEdgeDrag -integer 0 $windowManager
+plutil -replace EnableTilingOptionAccelerator -integer 0 $windowManager
+plutil -replace EnableTopTilingByEdgeDrag -integer 0 $windowManager
+plutil -replace HideDesktop -integer 1 $windowManager
+plutil -replace StageManagerHideWidgets -integer 0 $windowManager
+plutil -replace StandardHideWidgets -integer 0 $windowManager
 
 # Dock
-defaults write com.apple.dock launchanim -int 0
-defaults write com.apple.dock "minimize-to-application" -int 1
-defaults write com.apple.dock "show-recents" -int 0
-defaults write com.apple.dock tilesize -int 16
+dock="$HOME/Library/Preferences/com.apple.dock.plist"
+plutil -replace "show-recents" -integer 0 $dock
+plutil -replace tilesize -integer 16 $dock
 
+# iTerm2 Settings
+
+# RectangePro Settings

@@ -1,14 +1,16 @@
 #!/bin/bash
 
 declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "lua-language-server" "luarocks" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh" "jdtls")
-declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro" "slack")
+declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-blex-mono-nerd-font" "rectangle-pro" "slack")
 
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Logging
 logger="$HOME/Documents/MacBook_AutoSetup_log.txt"
+settings_logger="$HOME/Documents/Seetings_Configure_log.txt"
 touch $logger
+touch $settings_logger
 
 # Create File Structures
 mkdir -p $HOME/.config/nvim
@@ -72,10 +74,11 @@ git checkout stable >> $logger
 make CMAKE_BUILD_TYPE=Release >> $logger
 sudo make install >> $logger
 :
+
 # Configure MacOS Settings
 echo "\n\nConfiguring MacOS Settings"
-chmod +x $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
-sudo sh $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
+chmod +x $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $settings_logger
+sudo sh $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $settings_logger
 
 # Install Oh-My-Zsh
 echo "\n\nInstalling Oh-My-Zsh"
