@@ -1,5 +1,9 @@
 #!/bin/bash
 
+osascript -e 'tell application "System Preferences" to quit'
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # General Settings
 defaults write -globalDomain AppleActionOnDoubleClick -string "None"
 defaults write -globalDomain AppleInterfaceStyle -string "Dark"
