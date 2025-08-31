@@ -3,8 +3,17 @@
 declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "lua-language-server" "luarocks" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh" "jdtls")
 declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-ubuntu-nerd-font" "rectangle-pro" "slack")
 
+# Logging
 logger="$HOME/Documents/MacBook_AutoSetup_log.txt"
 touch $logger
+
+# Create File Structures
+mkdir -p $HOME/.config/nvim
+mkdir -p $HOME/.config/tmux
+mkdir -p $HOME/.config/omz/plugins
+
+mkdir -p $HOME/Documents/GitHub/neovim
+mkdir -p $HOME/Documents/GitHub/MacBook_AutoSetup
 
 # Xcode
 echo "Installing Xcode Tools"
@@ -20,7 +29,6 @@ echo >> $HOME/.zprofile
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# HomeBrew
 for tap in "${Homebrew_Taps[@]}"
 do
   echo "Brew Installing $tap"
@@ -37,36 +45,33 @@ echo "Cleaning Installation Files from Brew"
 brew cleanup >> $logger
 
 # Tmux Configs
-git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git $HOME/Documents/MacBook_AutoSetup >> $logger
-
 echo "Copying Tmux Config"
-mkdir -p $HOME/.config/tmux
-cp $HOME/Documents/MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
+cp $HOME/Documents/GitHub/MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # Install Nvim
 echo "Install Nvim"
-mkdir -p $HOME/Documents/GitHub
 git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub/neovim >> $logger
 
-cd $HOME/Documents/GitHub/neovim
 git checkout stable >> $logger
 make CMAKE_BUILD_TYPE=Release >> $logger
 sudo make install >> $logger
 :
 
 echo "Adding Nvim Config"
-mkdir -p $HOME/.config/nvim
 git clone https://github.com/DilanGoodwin/nvim.config.git $HOME/.config/nvim >> $logger
 
-# Install Oh-My-Zsh
-echo "Copying zsh Config"
-rm $HOME/.zshrc
-cp $HOME/Documents/MacBook_AutoSetup/.zshrc $HOME/.zshrc
+# Configure MacOS Settings
+chmod +x $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
+sh $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
 
-mkdir -p $HOME/.config/omz/plugins
+# Install Oh-My-Zsh
+echo "Installing Oh-My-Zsh"
+rm $HOME/.zshrc
+cp $HOME/Documents/GitHub/MacBook_AutoSetup/.zshrc $HOME/.zshrc
 
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/omz/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/omz/plugins/zsh-syntax-highlighting
 
-echo "Installing Oh-My-Zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc >> $logger
+
+reboot
