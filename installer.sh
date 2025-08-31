@@ -18,12 +18,8 @@ mkdir -p $HOME/.config/omz/plugins
 mkdir -p $HOME/Documents/GitHub/neovim
 mkdir -p $HOME/Documents/GitHub/MacBook_AutoSetup
 
-# Xcode
-echo "Installing Xcode Tools"
-xcode-select --install >> $logger 
-
 # Install HomeBrew
-echo "Installing Homebrew"
+echo "\n\nInstalling Homebrew"
 NONINTERACTIVE=1 /bin/bash -c \
    "$(curl -fsSL \
       https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >> $logger
@@ -48,32 +44,45 @@ echo "Cleaning Installation Files from Brew"
 brew cleanup >> $logger
 
 # Clone Desired Repos
+echo "\n\nCloning Git Repos for Configuration"
+
+echo "MacBook_AutoSetup.git"
 git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git $HOME/Documents/GitHub/MacBook_AutoSetup >> $logger
+
+echo "neovim.git"
 git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub/neovim >> $logger
+
+echo "nvim.config.git"
 git clone https://github.com/DilanGoodwin/nvim.config.git $HOME/.config/nvim >> $logger
+
+echo "zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/omz/plugins/zsh-autosuggestions >> $logger
+
+echo "zsh-syntax-highlighting.git"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/omz/plugins/zsh-syntax-highlighting >> $logger
 
 # Tmux Configs
-echo "Copying Tmux Config"
+echo "\n\nCopying Tmux Config"
 cp $HOME/Documents/GitHub/MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # Install Nvim
-echo "Install Nvim"
+echo "\n\nInstall Nvim"
+cd $HOME/Documents/GitHub/neovim
 git checkout stable >> $logger
 make CMAKE_BUILD_TYPE=Release >> $logger
 sudo make install >> $logger
 :
 # Configure MacOS Settings
+echo "\n\nConfiguring MacOS Settings"
 chmod +x $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
-sh $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
+sudo sh $HOME/Documents/GitHub/MacBook_AutoSetup/SettingsConfigure.sh >> $logger
 
 # Install Oh-My-Zsh
-echo "Installing Oh-My-Zsh"
+echo "\n\nInstalling Oh-My-Zsh"
 rm $HOME/.zshrc
 cp $HOME/Documents/GitHub/MacBook_AutoSetup/.zshrc $HOME/.zshrc
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc >> $logger
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc >> $logger
 
 # Reboot For Settings to Take Affect
 sudo reboot
