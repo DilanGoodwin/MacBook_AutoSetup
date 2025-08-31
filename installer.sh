@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a Homebrew_Taps=("git" "tmux" "curl" "gdb" "cmake" "lua" "lua-language-server" "luarocks" "rust" "node" "openjdk" "python" "pyenv" "perl" "ripgrep" "screen" "tree-sitter" "readline" "zsh" "jdtls")
-declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-blex-mono-nerd-font" "rectangle-pro" "slack")
+declare -a Homebrew_Cask=("firefox" "iterm2" "1password" "1password-cli" "font-blex-mono-nerd-font" "rectangle-pro" "slack" "microsoft-outlook" "microsoft-office")
 
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -19,7 +19,7 @@ mkdir -p $HOME/Documents/GitHub/neovim
 mkdir -p $HOME/Documents/GitHub/MacBook_AutoSetup
 
 # Install HomeBrew
-printf "\n\nInstalling Homebrew"
+printf "Installing Homebrew\n"
 NONINTERACTIVE=1 /bin/bash -c \
    "$(curl -fsSL \
       https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >> $logger
@@ -30,43 +30,43 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 for tap in "${Homebrew_Taps[@]}"
 do
-  printf "Brew Installing $tap"
+  printf "Brew Installing $tap\n"
   brew install $tap >> $logger
 done
 
 for cask in "${Homebrew_Cask[@]}"
 do
-  printf "Brew Installing $cask"
+  printf "Brew Installing $cask\n"
   brew install --cask $cask >> $logger
 done
 
-printf "Cleaning Installation Files from Brew"
+printf "Cleaning Installation Files from Brew\n"
 brew cleanup >> $logger
 
 # Clone Desired Repos
-printf "\n\nCloning Git Repos for Configuration"
+printf "\n\nCloning Git Repos for Configuration\n"
 
-printf "MacBook_AutoSetup.git"
+printf "MacBook_AutoSetup.git\n"
 git clone https://github.com/DilanGoodwin/MacBook_AutoSetup.git $HOME/Documents/GitHub/MacBook_AutoSetup >> $logger
 
-printf "neovim.git"
+printf "neovim.git\n"
 git clone https://github.com/neovim/neovim.git $HOME/Documents/GitHub/neovim >> $logger
 
-printf "nvim.config.git"
+printf "nvim.config.git\n"
 git clone https://github.com/DilanGoodwin/nvim.config.git $HOME/.config/nvim >> $logger
 
-printf "zsh-autosuggestions"
+printf "zsh-autosuggestions\n"
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/omz/plugins/zsh-autosuggestions >> $logger
 
-printf "zsh-syntax-highlighting.git"
+printf "zsh-syntax-highlighting.git\n"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/omz/plugins/zsh-syntax-highlighting >> $logger
 
 # Tmux Configs
-printf "\n\nCopying Tmux Config"
+printf "\n\nCopying Tmux Config\n"
 cp $HOME/Documents/GitHub/MacBook_AutoSetup/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # Install Nvim
-printf "\n\nInstall Nvim"
+printf "\n\nInstall Nvim\n"
 cd $HOME/Documents/GitHub/neovim
 git checkout stable >> $logger
 make CMAKE_BUILD_TYPE=Release >> $logger
@@ -74,7 +74,7 @@ sudo make install >> $logger
 :
 
 # Install Oh-My-Zsh
-printf "\n\nInstalling Oh-My-Zsh"
+printf "\n\nInstalling Oh-My-Zsh\n"
 rm $HOME/.zshrc
 cp $HOME/Documents/GitHub/MacBook_AutoSetup/.zshrc $HOME/.zshrc
 
