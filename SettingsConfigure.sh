@@ -66,6 +66,17 @@ plutil -replace WindowNumber -integer 0 $term
 printf "Rectange Pro Settings\n"
 rect="$HOME/Library/Preferences/com.knollsoft.Hookshot.plist"
 
+plutil -replace SUEnableAutomaticChecks -integer 0 $rect
+plutil -replace NSNavPanelExpandedStateForSaveMode -integer 1 $rect
+plutil -replace SUEnableAutomaticChecks -integer 1 $rect
+plutil -replace applyGapToEdges -integer 2 $rect
+plutil -replace doubleClickTitleBar -integer 3 $rect
+plutil -replace hideMenuBarIcon -integer 0 $rect
+plutil -replace hookshotStatusIcon -integer 3 $rect
+plutil -replace stashEnabled -integer 1 $rect
+plutil -replace stashInMenu -integer 1 $rect
+plutil -replace stashTabs -integer 1 $rect
+
 defaults read > $save_location/after_changes
 
 # Reboot
