@@ -3,14 +3,8 @@
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Open Applications
-open /Applications/iTerm.app
-open /Applications/Rectangle Pro.app
-
 # Kill Applications
 osascript -e 'tell application "System Preferences" to quit'
-osascript -e 'tell application "iTerm2" to quit'
-osascript -e 'tell application "Rectangle Pro" to quit'
 
 # General Settings
 defaults write -globalDomain AppleActionOnDoubleClick -string "None"
@@ -36,6 +30,12 @@ plutil -replace StandardHideWidgets -integer 0 $windowManager
 dock="$HOME/Library/Preferences/com.apple.dock.plist"
 plutil -replace "show-recents" -integer 0 $dock
 plutil -replace tilesize -integer 16 $dock
+
+# Finder
+finder="$HOME/Library/Preferences/com.apple.finder.plist"
+plutil -replace DesktopViewSettings.IconViewSettings.axTextSize -integer 11 $finder
+plutil -replace DesktopViewSettings.IconViewSettings.iconSize -integer 56 $finder
+plutil -replace DesktopViewSettings.IconViewSettings.textSize -integer 11 $finder 
 
 # iTerm2 Settings
 
