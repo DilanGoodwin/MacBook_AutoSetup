@@ -6,6 +6,13 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Kill Applications
 osascript -e 'tell application "System Preferences" to quit'
 
+printf "Settings Configurator\n"
+
+printf "Copying Settings Before Changes\n"
+save_location="$HOME/Documents/SettingsBackups"
+mkdir -p $save_location
+defaults read > $save_location/before_changes
+
 # General Settings
 defaults write -globalDomain AppleActionOnDoubleClick -string "None"
 defaults write -globalDomain AppleInterfaceStyle -string "Dark"
@@ -38,7 +45,9 @@ plutil -replace DesktopViewSettings.IconViewSettings.iconSize -integer 56 $finde
 plutil -replace DesktopViewSettings.IconViewSettings.textSize -integer 11 $finder 
 
 # iTerm2 Settings
+printf "iTerm2 Settings\n"
 term="$HOME/Library/Preferences/com.googlecode.iterm2.plist"
+
 plutil -replace EnableDivisionView -integer 0 $term
 plutil -replace HapticFeedbackForEsc -integer 0 $term
 plutil -replace HideMenuBarInFullscreen -integer 1 $term
@@ -54,7 +63,10 @@ plutil -replace VisualIndicatorForEsc -integer 0 $term
 plutil -replace WindowNumber -integer 0 $term
 
 # RectangePro Settings
+printf "Rectange Pro Settings\n"
+rect="$HOME/Library/Preferences/com.knollsoft.Hookshot.plist"
 
+defaults read > $save_location/after_changes
 
 # Reboot
 # Reboot is needed for setting changes to take affect
