@@ -58,6 +58,7 @@ plutil -replace TabViewType -integer 1 $term
 plutil -replace TabsHaveCloseButton -integer 0 $term
 plutil -replace VisualIndicatorForEsc -integer 0 $term
 plutil -replace WindowNumber -integer 0 $term
+plutil -replace PreventEscapeSequenceFromClearingHistory -integer 0 $term
 
 # RectangePro Settings
 printf "Rectange Pro Settings\n"
