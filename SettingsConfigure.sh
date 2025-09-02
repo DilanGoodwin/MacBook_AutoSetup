@@ -45,10 +45,12 @@ finder="$HOME/Library/Preferences/com.apple.finder.plist"
 printf "iTerm2 Settings\n"
 term="$HOME/Library/Preferences/com.googlecode.iterm2.plist"
 
+plutil -replace AlternateMouseScroll -integer 0 $term
 plutil -replace EnableDivisionView -integer 0 $term
 plutil -replace HapticFeedbackForEsc -integer 0 $term
 plutil -replace HideMenuBarInFullscreen -integer 1 $term
-plutil -replace HidTabNumber -integer 1 $term
+plutil -replace HideTabNumber -integer 1 $term
+plutil -replace HideActivityIndicator -integer 0 $term
 plutil -replace "Normal Font" -string "BlexMonoNF 12" $term
 plutil -replace ShowFullScreenTabBar -integer 0 $term
 plutil -replace SoundForEsc -integer 0 $term
@@ -58,7 +60,20 @@ plutil -replace TabViewType -integer 1 $term
 plutil -replace TabsHaveCloseButton -integer 0 $term
 plutil -replace VisualIndicatorForEsc -integer 0 $term
 plutil -replace WindowNumber -integer 0 $term
-plutil -replace PreventEscapeSequenceFromClearingHistory -integer 0 $term
+plutil -replace PreventEscapeSequenceFromClearingHistory -integer 1 $term
+plutil -replace HotKeyMigratedFromSingleToMulti -integer 1 $term
+plutil -replace NoSyncIgnoreSystemWindowRestoration -integer 1 $term
+plutil -replace NoSyncRemoveDeprecatedKeyMappings -integer 2 $term
+plutil -replace NoSyncRestoreWindowCount -integer 0 $term
+plutil -replace NoSyncScrollingHorizontally -integer 1 $term
+plutil -replace NoSyncSupressPromptToEnableResizing -integer 1 $term
+plutil -replace NoSyncUserHasSelectedCommand -integer 1 $term
+plutil -replace NoSyncWindowRestoresWorkspaceAtLaunch -integer 0 $term
+plutil -replace ShowNewOutputIndicator -integer 1 $term
+plutil -replace TabStyleWithAutomaticOption -integer 4 $term
+plutil -replace TerminalMargin -integer 5 $term
+plutil -replace VisualIndicatorForEsc -integer 0 $term
+plutil -replace "findMode_iTerm" -integer 0 $term
 
 # RectangePro Settings
 printf "Rectange Pro Settings\n"
@@ -74,6 +89,9 @@ plutil -replace hookshotStatusIcon -integer 3 $rect
 plutil -replace stashEnabled -integer 1 $rect
 plutil -replace stashInMenu -integer 1 $rect
 plutil -replace stashTabs -integer 1 $rect
+plutil -replace SUHasLaunchedBefore -integer 1 $rect
+plutil -replace allowAnyShortcut -integer 1 $rect
+plutil -replace internalTilingNotified -integer 1 $rect
 
 defaults read > $save_location/after_changes
 
